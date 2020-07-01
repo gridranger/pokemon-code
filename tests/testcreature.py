@@ -15,3 +15,13 @@ class TestCreature(TestCase):
         with self.assertRaises(RuntimeError) as e:
             Creature({"name": "Magicarp", "health": 10, "attack": 1, "defense": 10})
         self.assertEqual(e.exception.args[0], "A wild invalid initializer JSON appeared!")
+
+    def test_is_fainted(self):
+        c = Creature()
+        self.assertFalse(c.is_fainted)
+        c.current_health = -1
+        self.assertTrue(c.is_fainted)
+
+    def test____repr__(self):
+        c = Creature()
+        self.assertEqual("Dummymon (HP: 100)", f"{c}")
